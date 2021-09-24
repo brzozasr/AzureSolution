@@ -7,9 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.ServiceBus;
 using SharedModels.Models;
-using System.IO;
-using System.Reflection;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ServiceBusReader
 {
