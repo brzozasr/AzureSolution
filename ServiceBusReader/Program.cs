@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.ServiceBus;
 using SharedModels.Models;
+using System.IO;
 
 namespace ServiceBusReader
 {
@@ -17,7 +18,7 @@ namespace ServiceBusReader
 
         static async Task Main(string[] args)
         {
-            _queueClient = new QueueClient("Endpoint=sb://weather-bus.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=4RHOxOxLsfQL8VW4G98dEUPyyv0cmupjFmUKVyhR6FI=",
+            _queueClient = new QueueClient(GetAppSettingsJsonValue("ServiceBusConnectionStrings:DefaultConnection"),
                 QueueName);
 
             var messageHandlerOptions = new MessageHandlerOptions(ExceptionReceivedHandler)
@@ -67,10 +68,12 @@ namespace ServiceBusReader
 
         public static string GetAppSettingsJsonValue(string appSettingsJsonValue)
         {
+            var path = Directory.GetCurrentDirectory();
+
             var configurationBuilder = new ConfigurationBuilder();
             var configuration = configurationBuilder
-                //.SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", true)
+                .SetBasePath(Path.GetFullPath(Path.Combine(path, @"..\..\..\")))
+                .AddJsonFile(@"appsettings.json", true)
                 .Build();
             return configuration[appSettingsJsonValue];
         }
