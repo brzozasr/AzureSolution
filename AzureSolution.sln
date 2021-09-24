@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31613.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionDataSender", "FunctionDataSender\FunctionDataSender.csproj", "{0299C531-EA8E-453D-B138-4074D0CE2B26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedModels", "SharedModel\SharedModels.csproj", "{58809CAD-ED87-40AA-B2A0-730ADB153E79}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0299C531-EA8E-453D-B138-4074D0CE2B26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0299C531-EA8E-453D-B138-4074D0CE2B26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0299C531-EA8E-453D-B138-4074D0CE2B26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0299C531-EA8E-453D-B138-4074D0CE2B26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58809CAD-ED87-40AA-B2A0-730ADB153E79}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58809CAD-ED87-40AA-B2A0-730ADB153E79}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58809CAD-ED87-40AA-B2A0-730ADB153E79}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58809CAD-ED87-40AA-B2A0-730ADB153E79}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FAF76297-B0D1-4A7B-B3A6-F8100B137A11}
+	EndGlobalSection
+EndGlobal
