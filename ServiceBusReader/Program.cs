@@ -36,28 +36,36 @@ namespace ServiceBusReader
 
         private static async Task ProcessMessageAsync(Message message, CancellationToken token)
         {
-            var json = Encoding.UTF8.GetString(message.Body);
-            var weathers = JsonSerializer.Deserialize<List<Weather>>(json);
-
-            if (weathers is {Count: > 0})
+            try
             {
-                Console.WriteLine("Location: WFiIS AGH Cracow");
-                Console.WriteLine($"Time (UTC): {weathers[0].Utc}");
-                Console.WriteLine($"Temperature (C): {weathers[0].Data.Ta}");
-                Console.WriteLine($"Dew point (C): {weathers[0].Data.T0}");
-                Console.WriteLine($"Pressure (HPa): {weathers[0].Data.P0}");
-                Console.WriteLine($"Humidity (%): {weathers[0].Data.Ha}");
-                Console.WriteLine($"Precipitation in the last hour: {weathers[0].Data.R1}");
-                Console.WriteLine($"Precipitation: {weathers[0].Data.Ra}");
-                Console.WriteLine($"Wind direction: {weathers[0].Data.Wd}");
-                Console.WriteLine($"Wind speed: {weathers[0].Data.Ws}");
-                Console.WriteLine($"Current wind speed: {weathers[0].Data.Wg}");
-                Console.WriteLine($"Height above sea level: {weathers[0].Data.H0}");
-                Console.WriteLine("==============================================");
-                Console.WriteLine();
-            }
+                var json = Encoding.UTF8.GetString(message.Body);
+                var weathers = JsonSerializer.Deserialize<List<Weather>>(json);
 
-            await _queueClient.CompleteAsync(message.SystemProperties.LockToken);
+                if (weathers is { Count: > 0 })
+                {
+                    Console.WriteLine("Location: WFiIS AGH Cracow");
+                    Console.WriteLine($"Time (UTC): {weathers[0].Utc}");
+                    Console.WriteLine($"Temperature (C): {weathers[0].Data.Ta}");
+                    Console.WriteLine($"Dew point (C): {weathers[0].Data.T0}");
+                    Console.WriteLine($"Pressure (HPa): {weathers[0].Data.P0}");
+                    Console.WriteLine($"Humidity (%): {weathers[0].Data.Ha}");
+                    Console.WriteLine($"Precipitation in the last hour: {weathers[0].Data.R1}");
+                    Console.WriteLine($"Precipitation: {weathers[0].Data.Ra}");
+                    Console.WriteLine($"Wind direction: {weathers[0].Data.Wd}");
+                    Console.WriteLine($"Wind speed: {weathers[0].Data.Ws}");
+                    Console.WriteLine($"Current wind speed: {weathers[0].Data.Wg}");
+                    Console.WriteLine($"Height above sea level: {weathers[0].Data.H0}");
+                    Console.WriteLine("==============================================");
+                    Console.WriteLine();
+                }
+
+                await _queueClient.CompleteAsync(message.SystemProperties.LockToken);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            
         }
 
         private static Task ExceptionReceivedHandler(ExceptionReceivedEventArgs arg)
