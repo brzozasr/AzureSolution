@@ -76,12 +76,16 @@ namespace ServiceBusReader
 
         public static string GetAppSettingsJsonValue(string appSettingsJsonValue)
         {
-            var path = Directory.GetCurrentDirectory();
+            var pathCurrentDir = Directory.GetCurrentDirectory();
+            var pathCombine = Path.GetFullPath(Path.Combine(pathCurrentDir, @"..\..\..\"));
+            var fileName = "appsettings.json";
+
+            var usedPath = File.Exists($"{pathCurrentDir}\\{fileName}") ? pathCurrentDir : pathCombine;
 
             var configurationBuilder = new ConfigurationBuilder();
             var configuration = configurationBuilder
-                .SetBasePath(Path.GetFullPath(Path.Combine(path, @"..\..\..\")))
-                .AddJsonFile(@"appsettings.json", true)
+                .SetBasePath(usedPath)
+                .AddJsonFile(fileName, true)
                 .Build();
             return configuration[appSettingsJsonValue];
         }
